@@ -27,7 +27,7 @@ SECRET_KEY = 't#$a&19a&t#qwffspdb_p#1it*z@d_7&15ul1fk&im#!a@9fk^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -129,3 +129,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 STATIC_URL = '/static/'
+
+
+# UCL API
+
+UCLAPI_URL = config('UCLAPI_URL', default='https://uclapi.com/')
+UCLAPI_CLIENT_ID = config('UCLAPI_CLIENT_ID')
+UCLAPI_CLIENT_SECRET = config('UCLAPI_CLIENT_SECRET')
