@@ -41,3 +41,5 @@ def callback(request):
     user_res = user_req.json()
     # TODO: check state
     print(user_res)
+
+    return redirect('index')
