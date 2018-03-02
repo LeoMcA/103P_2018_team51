@@ -95,20 +95,20 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 
 # Internationalization
@@ -140,5 +140,9 @@ UCLAPI_URL = config('UCLAPI_URL', default='https://uclapi.com/')
 UCLAPI_CLIENT_ID = config('UCLAPI_CLIENT_ID')
 UCLAPI_CLIENT_SECRET = config('UCLAPI_CLIENT_SECRET')
 
-AUTHENTICATION_BACKENDS = ['ssig_site.auth.backends.UCL']
+AUTHENTICATION_BACKENDS = [
+    'ssig_site.auth.backends.UCL',
+    'django.contrib.auth.backends.ModelBackend'
+]
+
 AUTH_USER_MODEL = 'ssig_site_auth.User'
