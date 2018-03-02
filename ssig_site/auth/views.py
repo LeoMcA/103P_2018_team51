@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.contrib.auth import authenticate, login
 
 from urllib.parse import urlencode
-import requests
 
 
 def start(request):
@@ -17,29 +17,9 @@ def start(request):
 def callback(request):
     # TODO: check state
     code = request.GET.get('code')
+    user = authenticate(request, code=code)
 
-    token_params = {
-        'client_id': settings.UCLAPI_CLIENT_ID,
-        'code': code,
-        'client_secret': settings.UCLAPI_CLIENT_SECRET
-    }
-
-    token_url = settings.UCLAPI_URL + '/oauth/token'
-    token_req = requests.get(token_url, params=token_params)
-
-    token_res = token_req.json()
-    # TODO: check state
-
-    user_params = {
-        'token': token_res['token'],
-        'client_secret': settings.UCLAPI_CLIENT_SECRET
-    }
-
-    user_url = settings.UCLAPI_URL + '/oauth/user/data'
-    user_req = requests.get(user_url, params=user_params)
-
-    user_res = user_req.json()
-    # TODO: check state
-    print(user_res)
+    if user:
+        login(request, user)
 
     return redirect('index')
