@@ -37,6 +37,7 @@ SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=True, cast=bool)
 INSTALLED_APPS = [
     'ssig_site.base',
     'ssig_site.auth',
+    'ssig_site.metrics',
 
     'django_extensions',
 

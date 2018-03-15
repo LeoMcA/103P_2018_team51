@@ -1,6 +1,7 @@
 from django.conf import settings
 
 from .models import User
+from ssig_site.metrics.models import Metric
 
 import requests
 from secrets import compare_digest
@@ -45,6 +46,14 @@ class UCL:
                     full_name=user_res['full_name'],
                     given_name=user_res['given_name']
                 )
+                metric = Metric(
+                    name='user_registration',
+                    data={
+                        'ucl': True,
+                        'department': user.department
+                    }
+                )
+                metric.save()
             return user
 
         return None
