@@ -5,6 +5,7 @@ $theme-colors: (
 
 @import "node_modules/bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@import "node_modules/metrics-graphics/dist/metricsgraphics.css";
 
 #ixnNav {
   a {

@@ -20,7 +20,9 @@ gulp.task('sass:watch', () => {
 
 gulp.task('js:build', () => {
   gulp.src(['./node_modules/jquery/dist/jquery.slim.min.js',
-            './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'])
+            './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+            './node_modules/d3/build/d3.min.js',
+            './node_modules/metrics-graphics/dist/metricsgraphics.min.js'])
     .pipe(gulp.dest('./static/js'))
 })
 
