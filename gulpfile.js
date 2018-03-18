@@ -9,7 +9,8 @@ gulp.task('django:runserver', () => {
 })
 
 gulp.task('sass:build', () => {
-  gulp.src('./media/css/base.scss')
+  gulp.src(['./node_modules/metrics-graphics/dist/metricsgraphics.css',
+            './media/css/base.scss'])
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./static/css'))
 })
@@ -22,8 +23,14 @@ gulp.task('js:build', () => {
   gulp.src(['./node_modules/jquery/dist/jquery.slim.min.js',
             './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
             './node_modules/d3/build/d3.min.js',
-            './node_modules/metrics-graphics/dist/metricsgraphics.min.js'])
+            './node_modules/metrics-graphics/dist/metricsgraphics.min.js',
+            './media/js/*'
+          ])
     .pipe(gulp.dest('./static/js'))
+})
+
+gulp.task('js:watch', () => {
+  gulp.watch('./media/js/*', ['js:build'])
 })
 
 gulp.task('build', () => {
@@ -35,4 +42,5 @@ gulp.task('default', () => {
   gulp.start('build')
   gulp.start('django:runserver')
   gulp.start('sass:watch')
+  gulp.start('js:watch')
 })

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block header %}
+  <h1 class="my-3">Metrics</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="row my-3">
+    <div id="total-users"></div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'js/d3.min.js' %}"></script>
+  <script src="{% static 'js/metricsgraphics.min.js' %}"></script>
+  <script src="{% static 'js/metrics.js' %}"></script>
+{% endblock %}
