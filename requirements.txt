@@ -4,6 +4,7 @@ Babel==2.5.3
 certifi==2018.1.18
 chardet==3.0.4
 Django==2.0.2
+django-autofixture==0.12.1
 django-extensions==2.0.0
 docutils==0.14
 flake8==3.5.0

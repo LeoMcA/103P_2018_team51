@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ssig_site.metrics',
 
     'django_extensions',
+    'autofixture',
 
     'django.contrib.admin',
     'django.contrib.auth',

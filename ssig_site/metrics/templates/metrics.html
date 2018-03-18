@@ -9,7 +9,18 @@
 
 {% block content %}
   <div class="row my-3">
-    <div id="total-users"></div>
+    <div class="col">
+      <div id="total-users"></div>
+    </div>
+    <div class="col text-center">
+      <div id="new-users"></div>
+      <div id="new-users-controls" class="btn-group" role="group" aria-label="Period">
+        <span class="btn btn-outline-secondary disabled">Period</span>
+        <button type="button" class="btn btn-outline-secondary active" data-period="day">Day</button>
+        <button type="button" class="btn btn-outline-secondary" data-period="week">Week</button>
+        <button type="button" class="btn btn-outline-secondary" data-period="month">Month</button>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
