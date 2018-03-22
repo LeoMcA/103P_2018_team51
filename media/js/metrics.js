@@ -57,3 +57,16 @@ d3.json('data/events.json', data => {
     aggregate_rollover: true
   })
 })
+
+d3.json('data/new_members.json', data => {
+  data = MG.convert.date(data, 'date', DATE_FORMAT)
+  MG.data_graphic({
+    title: "New Members: All Groups",
+    data: data,
+    interpolate: d3.curveLinear,
+    full_width: true,
+    height: 300,
+    target: '#new-members',
+    y_accessor: 'total'
+  })
+})

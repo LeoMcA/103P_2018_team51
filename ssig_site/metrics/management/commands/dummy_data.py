@@ -26,3 +26,9 @@ class Command(BaseCommand):
             'datetime': generators.DateGenerator(min_date=datetime(2018, 1, 1), max_date=datetime(2018, 4, 24)),
             'increment': generators.ChoicesGenerator(values=(1,))
         }).create(int(114 * 3))
+
+        AutoFixture(Metric, field_values = {
+            'name': generators.StaticGenerator('new_members'),
+            'datetime': generators.DateTimeGenerator(min_date=datetime(2018, 1, 1), max_date=datetime(2018, 4, 24)),
+            'increment': generators.ChoicesGenerator(values=(-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+        }).create(140)

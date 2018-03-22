@@ -81,3 +81,15 @@ def events(request):
         .values('date', 'total')
     )
     return JsonResponse([registration_metrics, attendance_metrics], safe=False)
+
+@user_passes_test(staff_check)
+def new_members(request):
+    metrics = list(
+        models.Metric.objects
+        .filter(name='new_members')
+        .annotate(date=Trunc('datetime', 'week'))
+        .values('date')
+        .annotate(total=Sum('increment'))
+        .values('date', 'total')
+    )
+    return JsonResponse(metrics, safe=False)
