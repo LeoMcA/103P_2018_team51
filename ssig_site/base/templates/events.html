@@ -20,23 +20,7 @@
           </div>
           <p>{{ event.description }}</p>
 
-          <div class="event-details-date mt-auto mb-3 row no-gutters align-items-center">
-            <div class="col">
-              <time title="Starts" datetime="{{ event.start_datetime|date:"c" }}">{{ event.start_datetime|time:"h:i A" }}</time>
-            </div>
-            <div class="col">
-              <div class="event-date mx-auto">{{ event.start_datetime|date:"d" }}<br>{{ event.start_datetime | date:"M" }}</div>
-            </div>
-            <div class="col">
-              <time title="Ends" datetime="{{ event.end_datetime|date:"c" }}">
-                {% if event.start_datetime|date == event.end_datetime|date %}
-                  {{ event.end_datetime | time:"h:i A" }}
-                {% else %}
-                  {{ event.end_datetime | date:"d M" }}
-                {% endif %}
-              </time>
-            </div>
-          </div>
+          {% include 'event-time.html' %}
           {% if event in user.events.all %}
             <a class="btn btn-outline-primary btn-sm btn-block mt-auto" href="{% url 'event' event.id %}" role="button">More &rarr;</a>
           {% else %}

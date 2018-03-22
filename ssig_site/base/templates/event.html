@@ -23,13 +23,14 @@
 <div class="event-map-wrapper"><div class="event-map"></div></div>
 <div class="row event-body py-3">
   <div class="col">
+      {{ event.long_description | safe }}
+  </div>
+  <div class="col-xl-4">
+    {% include 'event-time.html' %}
+    <h6>Location:</h6>
     <p>
-    {{event.group}}
-    </p>
-    {{ event.start_datetime }}
-    {{ event.end_datetime }}
-    <p>
-      {{ event.description }}
+      {{ event.location }}<br>
+      <a href="#">View on map</a>
     </p>
   </div>
 </div>
@@ -87,7 +88,7 @@
         clickableIcons: false,
         backgroundColor: '#0b4f6c',
         styles: [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'geometry', stylers: [{color: '#0b4f6c'}]},
             {elementType: 'labels', stylers: [{visibility: 'off'}]},
             {
               featureType: 'poi',
@@ -96,12 +97,12 @@
             {
               featureType: 'road',
               elementType: 'geometry',
-              stylers: [{color: '#38414e'}]
+              stylers: [{color: '#09445e'}]
             },
             {
               featureType: 'road',
               elementType: 'geometry.stroke',
-              stylers: [{color: '#212a37'}]
+              stylers: [{color: '#0b4f6c'}]
             },
             {
               featureType: 'transit',
@@ -110,9 +111,14 @@
             {
               featureType: 'water',
               elementType: 'geometry',
-              stylers: [{color: '#17263c'}]
+              stylers: [{color: '#083b51'}]
             }
           ]
+      })
+
+      var marker = new google.maps.Marker({
+        position: { lat: 51.523, lng: -0.132 },
+        map: map
       })
 
       resize_map()

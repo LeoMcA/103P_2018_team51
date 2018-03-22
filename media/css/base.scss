@@ -62,20 +62,20 @@ body {
       font-size: 75%;
     }
   }
+}
 
-  .event-details-date {
-    text-align: center;
-    color: theme-color("primary");
+.event-details-date {
+  text-align: center;
+  color: theme-color("primary");
 
-    .event-date {
-      background: #fff;
-      line-height: 1.5rem;
-      border-radius: 50%;
-      height: 1.5rem * (2 + 1);
-      width: 1.5rem * (2 + 1);
-      padding-top: 0.7rem;
-      text-transform: uppercase;
-    }
+  .event-date {
+    background: #fff;
+    line-height: 1.5rem;
+    border-radius: 50%;
+    height: 1.5rem * (2 + 1);
+    width: 1.5rem * (2 + 1);
+    padding-top: 0.7rem;
+    text-transform: uppercase;
   }
 }
 
@@ -100,4 +100,9 @@ body {
 .event-body {
   background-color: #fff;
   margin-top: 200px;
+
+  .event-date {
+    background: theme-color("primary");
+    color: #fff;
+  }
 }
