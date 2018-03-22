@@ -11,7 +11,14 @@ $theme-colors: (
 
 body {
   font-family: Lato, Helvetica, Arial, "sans-serif";
-  background: theme-color("primary");
+
+  &.event-page {
+    background: theme-color("primary");
+
+    #ssigNav {
+      background: transparent;
+    }
+  }
 }
 
 #ixnNav {
@@ -29,6 +36,8 @@ body {
 }
 
 #ssigNav {
+  background: theme-color("primary");
+
   h1 {
     color: #fff;
   }
