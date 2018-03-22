@@ -39,3 +39,21 @@ $('#new-users-controls button').click(function () {
     MG.data_graphic(new_users)
   })
 })
+
+d3.json('data/events.json', data => {
+  for (var i = 0; i < data.length; i++) {
+    data[i] = MG.convert.date(data[i], 'date', DATE_FORMAT)
+  }
+  MG.data_graphic({
+    title: "Engagement: All Events",
+    data: data,
+    interpolate: d3.curveLinear,
+    full_width: true,
+    height: 300,
+    target: '#event-registration',
+    y_accessor: 'total',
+    legend: ['Registration','Attendance'],
+    legend_target: '#events-legend',
+    aggregate_rollover: true
+  })
+})

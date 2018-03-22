@@ -60,3 +60,24 @@ def new_users(request, period):
         return JsonResponse(metrics, safe=False)
     else:
         return HttpResponse(status=404)
+
+
+@user_passes_test(staff_check)
+def events(request):
+    registration_metrics = list(
+        models.Metric.objects
+        .filter(name='event_registration')
+        .annotate(date=Trunc('datetime', 'week'))
+        .values('date')
+        .annotate(total=Sum('increment'))
+        .values('date', 'total')
+    )
+    attendance_metrics = list(
+        models.Metric.objects
+        .filter(name='event_attendance')
+        .annotate(date=Trunc('datetime', 'week'))
+        .values('date')
+        .annotate(total=Sum('increment'))
+        .values('date', 'total')
+    )
+    return JsonResponse([registration_metrics, attendance_metrics], safe=False)
