@@ -20,12 +20,103 @@
 {% endblock %}
 
 {% block content %}
-<p>
-{{event.group}}
-</p>
-{{ event.start_datetime }}
-{{ event.end_datetime }}
-<p>
-  {{ event.description }}
-</p>
+<div class="event-map-wrapper"><div class="event-map"></div></div>
+<div class="row event-body py-3">
+  <div class="col">
+    <p>
+    {{event.group}}
+    </p>
+    {{ event.start_datetime }}
+    {{ event.end_datetime }}
+    <p>
+      {{ event.description }}
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    var TILE_SIZE = 256;
+
+    function lat_to_px(lat, scale) {
+      var siny = Math.sin(lat * Math.PI / 180)
+      var ayy = TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI))
+      return Math.floor(ayy * scale)
+    }
+
+    function px_to_lat(px, scale) {
+      var bar = (TILE_SIZE * 0.5 - px / scale) * 4 * Math.PI / TILE_SIZE
+      return Math.asin((Math.exp(bar) - 1) / (Math.exp(bar) + 1)) * 180 / Math.PI
+    }
+
+    var map;
+
+    function resize_map () {
+      // var padding_top = $('#ixnNav').outerHeight(true) + $('#ssigNav').outerHeight(true)
+      // var padding_bottom = $(window).height() - $('.event-body').offset().top
+      // console.log('top', padding_top, 'bottom', padding_bottom)
+
+      var offset = $(window).height() / 2 - ($('#ixnNav').outerHeight(true) + $('#ssigNav').outerHeight(true) + 100)
+
+      // var lat = map.getCenter().lat()
+      var scale = 1 << map.getZoom()
+
+      // console.log(lat, lat_to_px(lat, scale), px_to_lat(lat_to_px(lat, scale), scale))
+
+      // console.log(lat, px_to_lat(lat_to_px(lat, scale) + offset, scale))
+
+      map.setCenter({
+        lat: px_to_lat(lat_to_px(51.523, scale) + offset, scale),
+        lng: -0.132
+      })
+
+      // map.fitBounds({ north: 51.513142, south: 51.502218, east: -0.172041, west: -0.172041}, {top: padding_top/3, bottom: padding_bottom/3});
+    }
+
+    $(window).resize(resize_map)
+
+    function init_map () {
+      map = new google.maps.Map($('.event-map')[0], {
+        center: { lat: 51.523, lng: -0.132 },
+        zoom: 15,
+        disableDefaultUI: true,
+        gestureHandling: 'none',
+        draggableCursor: 'default;',
+        zoomControl: false,
+        clickableIcons: false,
+        backgroundColor: '#0b4f6c',
+        styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels', stylers: [{visibility: 'off'}]},
+            {
+              featureType: 'poi',
+              stylers: [{visibility: 'off'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'transit',
+              stylers: [{visibility: 'off'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
+      })
+
+      resize_map()
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_KEY }}&callback=init_map" async defer></script>
 {% endblock %}

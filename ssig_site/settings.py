@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ssig_site.context_processors.settings',
             ],
         },
     },
@@ -175,3 +176,8 @@ LOGGING = {
         },
     },
 }
+
+
+# Google Maps
+
+GOOGLE_MAPS_KEY = config('GOOGLE_MAPS_KEY', default='')
